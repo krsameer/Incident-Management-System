@@ -1,22 +1,28 @@
 import { RCARecord, SignalRecord, WorkItemRecord } from './types';
 
-const apiBase = import.meta.env.VITE_API_BASE_URL ?? '';
+const apiBase = import.meta.env.VITE_API_BASE_URL ?? (typeof window !== 'undefined' ? `${window.location.protocol}//${window.location.hostname}:3001` : 'http://localhost:3001');
 
 async function request<T>(path: string, init?: RequestInit): Promise<T> {
-  const response = await fetch(`${apiBase}${path}`, {
-    headers: {
-      'Content-Type': 'application/json',
-      ...(init?.headers ?? {})
-    },
-    ...init
-  });
+  const url = `${apiBase}${path}`;
+  console.debug('[api] request', init?.method ?? 'GET', url);
+  try {
+    const response = await fetch(url, {
+      headers: {
+        'Content-Type': 'application/json',
+        ...(init?.headers ?? {})
+      },
+      ...init
+    });
 
-  if (!response.ok) {
-    const text = await response.text();
-    throw new Error(text || response.statusText);
+    if (!response.ok) {
+      const text = await response.text();
+      throw new Error(`Request to ${url} failed: ${response.status} ${response.statusText} - ${text}`);
+    }
+
+    return response.json() as Promise<T>;
+  } catch (err: any) {
+    throw new Error(`Network request to ${url} failed: ${err?.message ?? String(err)}`);
   }
-
-  return response.json() as Promise<T>;
 }
 
 export async function loadDashboard(): Promise<WorkItemRecord[]> {
