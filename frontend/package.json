@@ -1,0 +1,25 @@
+{
+  "name": "ims-frontend",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "../node_modules/.bin/vite --host 0.0.0.0",
+    "build": "../node_modules/.bin/tsc -p tsconfig.json && ../node_modules/.bin/vite build",
+    "preview": "../node_modules/.bin/vite preview --host 0.0.0.0",
+    "lint": "eslint src --ext .ts,.tsx",
+    "typecheck": "../node_modules/.bin/tsc -p tsconfig.json --noEmit"
+  },
+  "dependencies": {
+    "react": "^19.1.0",
+    "react-dom": "^19.1.0"
+  },
+  "devDependencies": {
+    "@types/react": "^19.1.8",
+    "@types/react-dom": "^19.1.6",
+    "@vitejs/plugin-react": "^5.0.1",
+    "eslint": "^9.30.1",
+    "typescript": "^5.8.3",
+    "vite": "^7.0.6"
+  }
+}

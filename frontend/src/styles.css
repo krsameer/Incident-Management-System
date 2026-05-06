@@ -1,0 +1,343 @@
+:root {
+  color-scheme: dark;
+  font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+  --bg: #07111f;
+  --panel: rgba(10, 18, 35, 0.88);
+  --panel-border: rgba(148, 163, 184, 0.18);
+  --text: #e2e8f0;
+  --muted: #94a3b8;
+  --accent: #38bdf8;
+  --accent-strong: #0284c7;
+  --danger: #f87171;
+  --success: #4ade80;
+  --shadow: 0 24px 80px rgba(2, 8, 23, 0.45);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  color: var(--text);
+  background:
+    radial-gradient(circle at top left, rgba(56, 189, 248, 0.18), transparent 32%),
+    radial-gradient(circle at top right, rgba(16, 185, 129, 0.12), transparent 28%),
+    linear-gradient(180deg, #04111e 0%, #07111f 100%);
+}
+
+button,
+input,
+select,
+textarea {
+  font: inherit;
+}
+
+button {
+  cursor: pointer;
+}
+
+.shell {
+  width: min(1440px, calc(100vw - 32px));
+  margin: 0 auto;
+  padding: 32px 0 48px;
+  animation: fade-in 0.5s ease-out;
+}
+
+.hero {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  align-items: end;
+  margin-bottom: 24px;
+}
+
+.eyebrow {
+  color: var(--accent);
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  font-size: 0.75rem;
+  margin: 0 0 12px;
+}
+
+h1 {
+  margin: 0;
+  font-size: clamp(2.2rem, 5vw, 4.5rem);
+  line-height: 0.95;
+  max-width: 14ch;
+}
+
+.subtitle {
+  color: var(--muted);
+  max-width: 62ch;
+  margin: 16px 0 0;
+}
+
+.banner {
+  background: rgba(248, 113, 113, 0.12);
+  border: 1px solid rgba(248, 113, 113, 0.24);
+  color: #fecaca;
+  padding: 12px 16px;
+  border-radius: 16px;
+  margin-bottom: 20px;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: 360px minmax(0, 1fr);
+  gap: 20px;
+}
+
+.panel {
+  background: var(--panel);
+  border: 1px solid var(--panel-border);
+  border-radius: 24px;
+  box-shadow: var(--shadow);
+  backdrop-filter: blur(20px);
+}
+
+.panel-header {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  align-items: center;
+  padding: 20px 20px 0;
+}
+
+.panel-header h2,
+.panel-header h3 {
+  margin: 0;
+}
+
+.panel-header span,
+.muted,
+small,
+.incident-card p,
+.signal-item span {
+  color: var(--muted);
+}
+
+.incident-list,
+.detail-stack,
+.signal-list {
+  padding: 20px;
+}
+
+.incident-card {
+  width: 100%;
+  text-align: left;
+  padding: 16px;
+  border-radius: 18px;
+  border: 1px solid transparent;
+  background: rgba(15, 23, 42, 0.72);
+  color: var(--text);
+  margin-bottom: 12px;
+  transition: transform 180ms ease, border-color 180ms ease, background 180ms ease;
+}
+
+.incident-card:hover,
+.incident-card.selected {
+  transform: translateY(-2px);
+  border-color: rgba(56, 189, 248, 0.32);
+  background: rgba(15, 23, 42, 0.94);
+}
+
+.incident-card__top,
+.metrics-row,
+.actions,
+.form-actions {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  align-items: center;
+}
+
+.severity {
+  padding: 4px 10px;
+  border-radius: 999px;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.severity-critical { background: rgba(248, 113, 113, 0.18); color: #fecaca; }
+.severity-high { background: rgba(251, 191, 36, 0.18); color: #fde68a; }
+.severity-medium { background: rgba(56, 189, 248, 0.18); color: #bae6fd; }
+.severity-low { background: rgba(74, 222, 128, 0.18); color: #bbf7d0; }
+
+.detail-panel {
+  min-height: 620px;
+}
+
+.detail-stack {
+  display: grid;
+  gap: 16px;
+}
+
+.detail-card,
+.signal-item,
+label {
+  background: rgba(15, 23, 42, 0.72);
+  border: 1px solid rgba(148, 163, 184, 0.12);
+  border-radius: 18px;
+}
+
+.detail-card {
+  padding: 16px;
+}
+
+.metrics-row {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+.metrics-row span,
+label {
+  display: block;
+  color: var(--muted);
+  font-size: 0.82rem;
+}
+
+.metrics-row strong {
+  display: block;
+  margin-top: 6px;
+}
+
+.signal-item {
+  padding: 14px;
+  margin-bottom: 12px;
+}
+
+.signal-item div {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  align-items: baseline;
+}
+
+.signal-item p,
+.empty-state {
+  margin: 10px 0 0;
+  color: var(--text);
+}
+
+.panel-empty {
+  margin: 20px;
+  padding: 24px;
+}
+
+.rca-panel {
+  margin-top: 20px;
+}
+
+.form-grid {
+  padding: 20px;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.full-width {
+  grid-column: 1 / -1;
+}
+
+label {
+  padding: 14px;
+}
+
+input,
+select,
+textarea {
+  width: 100%;
+  margin-top: 10px;
+  background: rgba(2, 6, 23, 0.7);
+  color: var(--text);
+  border: 1px solid rgba(148, 163, 184, 0.18);
+  border-radius: 14px;
+  padding: 12px 14px;
+}
+
+textarea {
+  resize: vertical;
+}
+
+.form-actions {
+  padding: 0 20px 20px;
+  justify-content: flex-end;
+}
+
+.ghost-button,
+.primary-button,
+.secondary-button {
+  border: 0;
+  border-radius: 999px;
+  padding: 12px 18px;
+  transition: transform 180ms ease, opacity 180ms ease;
+}
+
+.ghost-button,
+.secondary-button {
+  background: rgba(56, 189, 248, 0.12);
+  color: var(--text);
+}
+
+.primary-button {
+  background: linear-gradient(135deg, var(--accent), var(--accent-strong));
+  color: white;
+}
+
+.ghost-button:hover,
+.primary-button:hover,
+.secondary-button:hover {
+  transform: translateY(-1px);
+}
+
+.ghost-button:disabled,
+.primary-button:disabled,
+.secondary-button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.empty-state {
+  text-align: center;
+  border: 1px dashed rgba(148, 163, 184, 0.24);
+  border-radius: 18px;
+  padding: 24px;
+}
+
+@keyframes fade-in {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@media (max-width: 1080px) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
+
+  .metrics-row,
+  .form-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (max-width: 720px) {
+  .shell {
+    width: min(100vw - 20px, 100vw);
+    padding-top: 16px;
+  }
+
+  .hero,
+  .actions,
+  .form-actions {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .metrics-row,
+  .form-grid {
+    grid-template-columns: 1fr;
+  }
+}
