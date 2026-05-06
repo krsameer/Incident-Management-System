@@ -1,3 +1,18 @@
+## Screenshots
+
+### Live Project
+
+![ss1](screenshots/ss1.png)
+
+### Live Project 2
+
+![ss2](screenshots/ss2.png)
+
+### Live Project 3
+
+![ss3](screenshots/ss3.png)
+
+
 # Incident Management System
 
 Resilient incident management platform for high-volume failure signals across APIs, MCP hosts, caches, async queues, PostgreSQL, and NoSQL services.
