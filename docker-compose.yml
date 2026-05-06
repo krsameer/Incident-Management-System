@@ -1,0 +1,61 @@
+services:
+  postgres:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_DB: ims
+      POSTGRES_USER: ims
+      POSTGRES_PASSWORD: ims
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+
+  mongodb:
+    image: mongo:7
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo-data:/data/db
+
+  redis:
+    image: redis:7-alpine
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis-data:/data
+
+  backend:
+    build:
+      context: .
+      dockerfile: backend/Dockerfile
+    environment:
+      PORT: 3001
+      POSTGRES_URL: postgres://ims:ims@postgres:5432/ims
+      MONGODB_URL: mongodb://mongodb:27017
+      MONGODB_DB: ims
+      REDIS_URL: redis://redis:6379
+      CORS_ORIGIN: http://localhost:5173
+    depends_on:
+      - postgres
+      - mongodb
+      - redis
+    ports:
+      - "3001:3001"
+
+  frontend:
+    build:
+      context: .
+      dockerfile: frontend/Dockerfile
+      args:
+        VITE_API_BASE_URL: http://localhost:3001
+    environment:
+      VITE_API_BASE_URL: http://localhost:3001
+    depends_on:
+      - backend
+    ports:
+      - "5173:5173"
+
+volumes:
+  postgres-data:
+  mongo-data:
+  redis-data:

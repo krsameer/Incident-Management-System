@@ -1,0 +1,13 @@
+{
+  "componentId": "RDBMS_PRIMARY_01",
+  "componentType": "rdbms",
+  "source": "synthetic-generator",
+  "severityHint": "critical",
+  "message": "Connection pool exhausted after primary node latency spike",
+  "details": {
+    "symptom": "write timeouts",
+    "traceId": "demo-trace-001",
+    "payloadSize": 512
+  },
+  "timestamp": "2026-05-06T00:00:00.000Z"
+}
