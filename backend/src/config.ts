@@ -6,7 +6,8 @@ const configSchema = z.object({
   MONGODB_URL: z.string().default('mongodb://localhost:27017'),
   MONGODB_DB: z.string().default('ims'),
   REDIS_URL: z.string().default('redis://localhost:6379'),
-  CORS_ORIGIN: z.string().default('http://localhost:5173')
+  // During local development allow any origin to avoid CORS issues
+  CORS_ORIGIN: z.string().default('*')
 });
 
 export const config = configSchema.parse(process.env);
